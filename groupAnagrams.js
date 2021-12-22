@@ -35,55 +35,69 @@ Output: [["a"]]
  * @param {string[]} strs
  * @return {string[][]}
  */
- var groupAnagrams = function(strs) {
+var groupAnagrams = function (strs) {
     let strA = []
-    for(let i = 0; i <strs.length; i++){
+    for (let i = 0; i < strs.length; i++) {
         strA.push(strs[i].split('').sort().join(''));
     }
     let rtnA = [];
-    let strB = [...strA];    
-    let strC= [...strA];
+    let strB = [...strA];
+    let strC = [...strA];
 
     strB.sort();
     let tmp = strB[0];
 
-   
-    for(let j = 0; j<strB.length ; j++){
-        let foundIndex = strA.findIndex(x=>x===strB[j]);
+
+    for (let j = 0; j < strB.length; j++) {
+        let foundIndex = strA.findIndex(x => x === strB[j]);
         rtnA.push(foundIndex)
-        strA[foundIndex] = null;        
+        strA[foundIndex] = null;
     }
-   
+
     let tmpSS = strC[rtnA[0]]
     let tmpA = [];
     let bigA = [];
-    for(let k = 0 ; k< rtnA.length; k++){ 
-       
-        if(tmpSS === strC[rtnA[k]] ){
-            tmpA.push(strs[rtnA[k]])      
-            if(k === rtnA.length - 1){
-                bigA.push(tmpA);                
+    for (let k = 0; k < rtnA.length; k++) {
+
+        if (tmpSS === strC[rtnA[k]]) {
+            tmpA.push(strs[rtnA[k]])
+            if (k === rtnA.length - 1) {
+                bigA.push(tmpA);
             }
-        } else{
+        } else {
             bigA.push(tmpA);
             tmpA = new Array();
             tmpA.push(strs[rtnA[k]])
-            if(tmpSS !== strC[rtnA[k]] && k === rtnA.length - 1){              
-                bigA.push(tmpA);                
+            if (tmpSS !== strC[rtnA[k]] && k === rtnA.length - 1) {
+                bigA.push(tmpA);
             }
             tmpSS = strC[rtnA[k]]
         }
-    
-        
+
+
     }
     return bigA;
 };
 
-var groupAnagrams2 = function(strs) {
-    
+var groupAnagrams2 = function (strs) {
+    let hash = new Map();
+    strs.forEach(x => {
+        let tmp = x.split('').sort().join('')
+        if (hash.get(tmp) != null) {
+            hash.get(tmp).push(x);
+        } else {
+            hash.set(tmp, []);
+            hash.get(tmp).push(x);
+        }
+    })
+    let ans = [];
+    for (let c of hash.values()){
+        ans.push(c);
+    }
+    return ans;
 };
 
 
 
 
-console.log(JSON.stringify(groupAnagrams(["eat","tea","tan","ate","nat","bat"])))
+console.log(JSON.stringify(groupAnagrams2(["eat", "tea", "tan", "ate", "nat", "bat"])))
