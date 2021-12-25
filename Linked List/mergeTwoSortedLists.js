@@ -69,3 +69,6 @@ var mergeTwoLists = function (list1, list2) {
 
     return head.next;
 };
+
+
+console.log()
