@@ -58,19 +58,13 @@ function TreeNode(val, left, right) {
  */
 var isSubtree = function (root, subRoot) {
 
+    if (root == null) return false;
 
     if (isSameTree(root, subRoot)) {
         return true;
     } else {
-        if (root != null && root.left != null) {
-            isSubtree(root.left, subRoot)
-        }
-        if (root != null && root.right != null) {
-            isSubtree(root.right, subRoot)
-        }
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot)
     }
-
-    return false;
 };
 
 var isSameTree = function (p, q) {
