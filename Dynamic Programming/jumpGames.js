@@ -29,21 +29,37 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum jump 
 // https://leetcode.com/problems/jump-game/
 
 
+
+
 /**
  * @param {number[]} nums
  * @return {boolean}
  */
- var canJump = function(nums) {
-    if(nums.length === 1) return true;
-    
+var canJump = function (nums) {
+    if (nums.length === 1) return true;
+
     let dist = 0;
-    for(let i = 0; i < nums.length; i ++){
-        dist = Math.max(nums[i],dist);
-        if(dist === 0 && i != nums.length -1) return false;
+    for (let i = 0; i < nums.length; i++) {
+        dist = Math.max(nums[i], dist);
+        if (dist === 0 && i != nums.length - 1) return false;
         dist--;
     }
     return true;
 };
 
 
-console.log(canJump([3,2,1,0,4]))
+// if index > max step then return false
+var canJump2 = function (nums) {
+    if (nums.length === 1) return true;
+
+    let max = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (i > max) return false;
+        max = Math.max(max, i + nums[i]);
+    }
+
+    return true;
+};
+
+
+console.log(canJump2([3, 2, 1, 1, 4]))
