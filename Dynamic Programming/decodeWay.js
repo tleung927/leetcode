@@ -47,20 +47,21 @@ Explanation: "06" cannot be mapped to "F" because of the leading zero ("6" is di
  * @param {string} s
  * @return {number}
  */
- var numDecodings = function (s) {
+var numDecodings = function (s) {
     if (!s || s.length === 0 || s[0] === "0") return 0;
-    
+
+    // if 
     let dp = [1, 1];
     for (let i = 2; i <= s.length; i++) {
         let val = 0;
-        if (s[i-1] !== "0") val += dp[i-1];
-        const substr = s.substr(i-2, 2);
-        if (substr > 9 && substr < 27) val += dp[i-2];
+        if (s[i - 1] !== "0") val += dp[i - 1];
+        const substr = s.substr(i - 2, 2);
+        if (substr > 9 && substr < 27) val += dp[i - 2];
         dp[i] = val;
     }
-    
+
     return dp[s.length];
 };
 
 
-console.log(numDecodings("226"))
+console.log(numDecodings("22"))
