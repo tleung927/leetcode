@@ -43,16 +43,23 @@ Constraints:
  * @return {number}
  */
 
- let result = null;
+/** if n = 0 then no way up then return 0,
+ * if n = 1 only one step then one way up return 1
+ * if n = 2 then 1+1 or 2 then two way return 2
+ * if n = 3 then it will be the way only 1 +  only 2 step ()
+ * so for the next n step will be the previous i-1 ways + i-2 ways
+ * then return the dp[n] will be the result  
+ */
  var climbStairs = function(n) {
-         
-   let arr=[];
-     arr[1]=1;
-     arr[2]=2;
-     for(let i=3;i<=n;i++){
-         arr[i]=arr[i-1]+arr[i-2];
-     }
-     return arr[n];
- };
+    let dp = new Array(n+1)
+    
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 2;
+    for(let i = 3; i <= n ; i++){
+        dp[i] = dp[i-1]+dp[i-2];        
+    }
+    return dp[n];
+};
 
- console.log(climbStairs(3))
+console.log(climbStairs(3))

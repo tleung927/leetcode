@@ -37,11 +37,17 @@ var rob = function (nums) {
     if (nums.length === 1) return nums[0];
     if (nums.length === 0) return 0;
     let dp = [];
+    // store the first two house, 
+    // first is the first house
+    // seconde is the max between first and second
     dp[0] = nums[0];
     dp[1] = Math.max(nums[0], nums[1])
-    for (let i = 2; i < nums.length; i++) {
-        dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1])
 
+    // start from the 3rd like decode ways 
+    for (let i = 2; i < nums.length; i++) {
+        // the max of current is current + the two house ahead history  or the previous house 
+        // store the larger value
+        dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1])
     }
     return dp[nums.length - 1];
 };
