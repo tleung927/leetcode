@@ -34,7 +34,7 @@ Output: []
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function (nums) {
+ var threeSum = function (nums) {
     if (nums.length <= 2) return [];
     if (nums.length === 3 && nums[0] + nums[1] + nums[2] === 0) { return [nums]; }
     if (nums.length === 3 && nums[0] + nums[1] + nums[2] !== 0) { return []; }
@@ -46,9 +46,9 @@ var threeSum = function (nums) {
 
     for (let j = 0; j < nums.length - 2; j++) {
         if (nums[j] > 0) break;
+
         let i = j + 1
         let k = nums.length - 1;
-
         while (i < k) {
             if (nums[i] + nums[j] + nums[k] === 0) {
                 rtn.push([nums[i], nums[j], nums[k]]);
@@ -82,4 +82,30 @@ var threeSum = function (nums) {
     return result;
 };
 
-console.log(threeSum([0,0,0,0]))
+
+var threeSum2 = function (nums) {
+    let rtn = [];
+    nums = nums.sort((a, b) => a - b);
+
+    for (let i = 0; i < nums.length - 2; i++) {
+        let left = i + 1;
+        let right = nums.length - 1;
+        if (nums[i] === nums[i - 1]) continue;
+        while (left < right) {
+            if (nums[i] + nums[left] + nums[right] > 0) {
+                right--;
+            } else if (nums[i] + nums[left] + nums[right] < 0) {
+                left++;
+            }
+            else if (nums[i] + nums[left] + nums[right] === 0) {
+                rtn.push([nums[i], nums[left], nums[right]]);
+                while (left < right && nums[left] === nums[left + 1]) left++;
+                while (left < right && nums[right] === nums[right - 1]) right--;
+                left++;
+            }
+        }
+    }
+    return rtn;
+}
+
+console.log(threeSum2([-1, 0, 1, 2, -1, -4]))
