@@ -39,6 +39,13 @@ Constraints:
 
 // https://leetcode.com/problems/coin-change/
 
+
+/**similar to climbStair, the min way to get 3 equal to min way to get 1 combine 2
+ * let said we have coins 1, 2 and 5 
+ * like min way to get 1 is 1 of 1 and min to get two is  two of one (1+1) or one two (2) then min way to get three is 1 (way to  get one) +   2 (way to get two)
+ * and similar to else, and there is a flag**** the number it try to get must smaller then the coin itself , like you try to get 1 the coin of (3,5 does need to care) 
+ */
+
 /**
  * @param {number[]} coins
  * @param {number} amount
@@ -60,4 +67,4 @@ Constraints:
         
 };
 
-console.log(coinChange([1,2,5],11))
+console.log(coinChange([1,2,5],18))
