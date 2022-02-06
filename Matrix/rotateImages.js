@@ -30,16 +30,19 @@ Output: [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]] */
 // https://leetcode.com/problems/rotate-image/
 
 
-var rotate = function (m) {
-    let n = m.length;
-    for (let i = 0; i < n - 1; i++) {
-        for (let j = n - 1; j > 0; j--) { 
-            let tmp = m[i][j-n+1];
-            m[i][j-n+1] = m[n-i][j];
-            m[i]
+var rotate = function (matrix) {
 
+    if (matrix.length === 1) return matrix;
+
+    let NewMatrix = JSON.parse(JSON.stringify(matrix));
+    let n = matrix.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = n - 1; j >= 0; j--) {
+            matrix[i][n - j - 1] = NewMatrix[j][i]
         }
     }
+
+    return matrix
 };
 
-console.log(JSON.stringify(rotate([[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]])))
+console.log(JSON.stringify(rotate([[1, 2, 3], [4, 5, 6], [7, 8, 9]])))
