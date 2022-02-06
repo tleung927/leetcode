@@ -47,9 +47,30 @@ nums is an ascending array that is possibly rotated.
  * @param {number} target
  * @return {number}
  */
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
 var search = function (nums, target) {
-
+    if (nums[0] === target) return 0;
+    if (nums[nums.length - 1] === target) return nums.length - 1;
+    let theLast = nums[nums.length - 1];
+    let count = 0;
+    let found = false;
+    while (nums[0] !== theLast) {
+        if (nums[0] === target) {
+            found = true;
+            break;
+        }
+        nums.push(nums[0]);
+        nums.splice(0, 1);
+        count++;
+    }
+    if (found) return count;
+    else return -1;
 };
 
 
-console.log(search([4, 5, 6, 7, 0, 1, 2]));
+console.log(search([1, 3, 5],
+    5));

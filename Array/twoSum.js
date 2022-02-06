@@ -64,16 +64,30 @@ var twoSum = function (nums, target) {
     return result;
 };
 
-function twoSum2 (nums, target){
-   
-    for(let i = 0; i < nums.length ; i++){
+function twoSum2(nums, target) {
+
+    for (let i = 0; i < nums.length; i++) {
         let partner = target - nums[i];
-        let found = nums.findIndex(x=>x === partner);
-        if(found > -1 ){
-            return [i,found];
+        let found = nums.findIndex(x => x === partner);
+        if (found > -1) {
+            return [i, found];
         }
     }
     return [];
 }
 
-console.log(twoSum([2, 7, 11, 15], 9));
+function twoSum3(nums, target) {
+    let i = 0;
+    let j = nums.length - 1;
+    while (i < j) {
+        if (nums[i] + nums[j] === target) {
+            return [i, j];
+        }
+        i++;
+        j--;
+    }
+    return [];
+}
+
+
+console.log(twoSum3([2, 7, 11, 15], 9));
